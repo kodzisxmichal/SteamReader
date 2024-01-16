@@ -28,6 +28,7 @@ public class PlayerApiClient implements IPlayersApiClient{
         var URL = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="
                 +apiKey+"&steamid="+steamID+"&relationship=friend";
 
+        FriendsListDTO friendsListDTO = restTemplate.getForObject(URL, FriendsListDTO.class);
         return restTemplate.getForObject(URL, FriendsListDTO.class);
     }
 

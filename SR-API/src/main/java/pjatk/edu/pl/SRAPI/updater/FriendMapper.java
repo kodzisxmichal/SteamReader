@@ -1,11 +1,13 @@
 package pjatk.edu.pl.SRAPI.updater;
 
 
+import org.springframework.stereotype.Component;
 import pjatk.edu.pl.SRAPI.contract.friend.FriendDTO;
 import pjatk.edu.pl.SRAPI.contract.player.PlayerDTO;
 import pjatk.edu.pl.SRAPI.model.Friend;
 import pjatk.edu.pl.SRAPI.model.Player;
 
+@Component
 public class FriendMapper implements IMap<FriendDTO, Friend>{
 
     IMap<PlayerDTO, Player> playerMapper;
@@ -15,7 +17,6 @@ public class FriendMapper implements IMap<FriendDTO, Friend>{
         var friend = new Friend();
 
         friend.setFriendSince(friendDTO.getFriend_since());
-        friend.setSteamID(Long.valueOf(friendDTO.getSteamid()));
 
         return friend;
     }

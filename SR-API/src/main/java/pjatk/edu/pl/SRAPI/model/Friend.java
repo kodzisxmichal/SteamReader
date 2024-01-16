@@ -13,9 +13,8 @@ public class Friend {
     private Long ID;
     @ManyToOne
     private Player playerParent;
-    @OneToOne
+    @OneToMany
     private Player playerFriend;
-    private Long steamID;
     private Long friendSince;
 
     public void setID(Long ID) {
@@ -28,10 +27,6 @@ public class Friend {
 
     public void setFriendSince(Long friendSince) {
         this.friendSince = friendSince;
-    }
-
-    public void setSteamID(Long steamID) {
-        this.steamID = steamID;
     }
 
     public void setPlayerFriend(Player playerFriend) {

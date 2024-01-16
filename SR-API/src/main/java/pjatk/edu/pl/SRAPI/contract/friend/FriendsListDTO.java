@@ -1,5 +1,6 @@
 package pjatk.edu.pl.SRAPI.contract.friend;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
