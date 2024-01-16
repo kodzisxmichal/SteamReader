@@ -46,9 +46,9 @@ public class SrApiApplication implements CommandLineRunner {
 					System.out.println(p.getPersonName());
 					repository.save(p);
 				});
-		client.getFriendList(76561198140468616L)
+
+		client.getFriendList(76561198276528910L)
 				.getFriendsDTO()
-				.getFriendDTOS()
 				.stream().map(friendMapper::map)
 				.forEach(friendRepository::save);
 	}

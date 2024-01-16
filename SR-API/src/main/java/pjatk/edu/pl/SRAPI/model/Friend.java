@@ -13,7 +13,7 @@ public class Friend {
     private Long ID;
     @ManyToOne
     private Player playerParent;
-    @OneToMany
+    @OneToOne
     private Player playerFriend;
     private Long friendSince;
 
