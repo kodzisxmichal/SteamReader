@@ -14,6 +14,8 @@ public class GameProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID;
     @ManyToOne
+    private Player player;
+    @ManyToOne
     private Game game;
     @OneToMany(mappedBy = "gameProfile")
     private List<Achievement> achievements;

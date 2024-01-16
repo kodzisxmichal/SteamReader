@@ -3,6 +3,7 @@ package pjatk.edu.pl.SRAPI.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,9 @@ public class Player {
     private int commentPermission;
     private String realName;
     @OneToMany(mappedBy = "playerParent")
-    private List<Friend> friend;
+    private List<Friend> friends;
+    @OneToMany(mappedBy = "player")
+    private List<GameProfile> gameProfiles;
 
     public void setSteamID(Long steamID) {
         this.steamID = steamID;
