@@ -2,8 +2,8 @@ package pjatk.edu.pl.SRAPI.apiclient;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import pjatk.edu.pl.SRAPI.contract.friend.FriendsDTO;
 import pjatk.edu.pl.SRAPI.contract.friend.FriendsListDTO;
-import pjatk.edu.pl.SRAPI.contract.friend.SteamResponse;
 import pjatk.edu.pl.SRAPI.contract.gameProfile.GameProfileResponseDTO;
 import pjatk.edu.pl.SRAPI.contract.player.PlayerResponseDTO;
 
@@ -25,13 +25,13 @@ public class PlayerApiClient implements IPlayersApiClient{
     }
 
     @Override
-    public FriendsListDTO getFriendList(Long steamID) {
+    public FriendsDTO getFriendList(Long steamID) {
         var URL = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="
                 +apiKey+"&steamid="+steamID+"&relationship=friend";
 
-        SteamResponse steamResponse = restTemplate.getForObject(URL, SteamResponse.class);
+        FriendsListDTO friendsListDTO = restTemplate.getForObject(URL, FriendsListDTO.class);
 
-        return steamResponse.getFriendsListDTO();
+        return friendsListDTO.getFriendsListDTO();
     }
 
     @Override

@@ -1,23 +1,19 @@
 package pjatk.edu.pl.SRAPI.contract.friend;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 
-import java.util.List;
-
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FriendsListDTO {
 
-    @JsonProperty("friends")
-    private List<FriendDTO> friendsDTO;
+    @JsonProperty("friendslist")
+    FriendsDTO friendsDTO;
 
-    public FriendsListDTO(){}
-
-    public List<FriendDTO> getFriendsDTO() {
+    public FriendsDTO getFriendsListDTO() {
         return friendsDTO;
     }
 
-    public void setFriendsDTO(List<FriendDTO> friendsDTO) {
+    public void setFriendsListDTO(FriendsDTO friendsDTO) {
         this.friendsDTO = friendsDTO;
     }
 }

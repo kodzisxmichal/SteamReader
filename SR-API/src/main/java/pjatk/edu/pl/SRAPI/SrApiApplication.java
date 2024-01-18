@@ -38,7 +38,7 @@ public class SrApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		client.getPlayers(76561198276528910L)
+		client.getPlayers(76561198140468616L)
 				.getPlayersDTO()
 				.getPlayerDTOS()
 				.stream().map(mapper::map)
@@ -47,10 +47,14 @@ public class SrApiApplication implements CommandLineRunner {
 					repository.save(p);
 				});
 
-		client.getFriendList(76561198276528910L)
+		client.getFriendList(76561198140468616L)
 				.getFriendsDTO()
 				.stream().map(friendMapper::map)
-				.forEach(friendRepository::save);
+				//.forEach(friendRepository::save);
+				.forEach(f->{
+					f.setPlayerParent(repository.findById(76561198140468616L).orElseThrow());
+					friendRepository.save(f);
+				});
 	}
 
 }

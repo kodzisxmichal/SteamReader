@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 @Entity
 public class Achievement  {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private GameProfile gameProfile;
