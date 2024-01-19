@@ -1,22 +1,22 @@
 package pjatk.edu.pl.SRAPI.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pjatk.edu.pl.SRAPI.model.Game;
 import pjatk.edu.pl.SRAPI.model.GameProfile;
 import pjatk.edu.pl.SRAPI.repositories.GameProfileRepository;
-import pjatk.edu.pl.SRAPI.repositories.GameRepository;
+import pjatk.edu.pl.SRAPI.repositories.SRDataCatalog;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class GameProfileService {
-    GameProfileRepository repository;
+    private final GameProfileRepository gameProfileRepository;
 
-    public GameProfileService(GameProfileRepository gameProfileRepository){
-        this.repository = gameProfileRepository;
+    public GameProfile findByID(Long ID){
+        return gameProfileRepository.findById(ID).orElseThrow();
     }
-
     public List<GameProfile> findAll(){
-        return repository.findAll();
+        return gameProfileRepository.findAll();
     }
 }

@@ -1,5 +1,7 @@
 package pjatk.edu.pl.SRAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -24,8 +26,10 @@ public class Player {
     private int communityVisibilityState;
     private int commentPermission;
     private String realName;
+    @JsonManagedReference
     @OneToMany(mappedBy = "playerParent")
     private List<Friend> friends;
+    @JsonManagedReference
     @OneToMany(mappedBy = "player")
     private List<GameProfile> gameProfiles;
 

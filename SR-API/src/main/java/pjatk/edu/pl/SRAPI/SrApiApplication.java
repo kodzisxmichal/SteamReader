@@ -70,6 +70,7 @@ public class SrApiApplication implements CommandLineRunner {
 				.stream().map(friendMapper::map)
 				//.forEach(friendRepository::save);
 				.forEach(f->{
+
 					f.setPlayerParent(repository.findById(steamid).orElseThrow());
 					friendRepository.save(f);
 				});

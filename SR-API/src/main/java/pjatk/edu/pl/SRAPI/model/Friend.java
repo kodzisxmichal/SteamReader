@@ -1,5 +1,6 @@
 package pjatk.edu.pl.SRAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ public class Friend {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
+    @JsonBackReference
     @ManyToOne
     private Player playerParent;
     private Long friendSteamID;

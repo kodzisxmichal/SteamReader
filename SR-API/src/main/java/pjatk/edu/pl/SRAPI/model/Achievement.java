@@ -1,5 +1,6 @@
 package pjatk.edu.pl.SRAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ public class Achievement  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonBackReference
     @ManyToOne
     private GameProfile gameProfile;
     private String name;

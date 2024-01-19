@@ -25,7 +25,7 @@ public class PlayerController {
         return "Welcome to the steam reader";
     }
 
-    @GetMapping("findBySteamID")
+    @GetMapping("/steamid")
     public Player findBySteamID(@RequestParam Long steamID){
         return playerService.findBySteamID(steamID);
     }

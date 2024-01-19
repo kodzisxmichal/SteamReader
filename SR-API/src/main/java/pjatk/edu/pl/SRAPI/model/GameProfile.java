@@ -1,5 +1,7 @@
 package pjatk.edu.pl.SRAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +17,11 @@ public class GameProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
     @ManyToOne
+    @JsonBackReference
     private Player player;
 //    @ManyToOne
 //    private Game game;
+    @JsonManagedReference
     @OneToMany(mappedBy = "gameProfile")
     private List<Achievement> achievements;
     private Long appID;
