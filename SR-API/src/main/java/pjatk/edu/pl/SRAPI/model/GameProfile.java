@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
+
 @Getter
 @RequiredArgsConstructor
 @Entity
@@ -15,10 +16,12 @@ public class GameProfile {
     private Long ID;
     @ManyToOne
     private Player player;
-    @ManyToOne
-    private Game game;
+//    @ManyToOne
+//    private Game game;
     @OneToMany(mappedBy = "gameProfile")
     private List<Achievement> achievements;
+    private Long appID;
+    private String appName;
     private Long totalPlaytime;
     private Long lastTimePlayed;
     private Long playTimeDisconnected;
@@ -27,9 +30,9 @@ public class GameProfile {
         this.ID = ID;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
+//    public void setGame(Game game) {
+//        this.game = game;
+//    }
 
     public void setAchievements(List<Achievement> achievements) {
         this.achievements = achievements;
@@ -45,5 +48,17 @@ public class GameProfile {
 
     public void setPlayTimeDisconnected(Long playTimeDisconnected) {
         this.playTimeDisconnected = playTimeDisconnected;
+    }
+
+    public void setAppID(Long appID) {
+        this.appID = appID;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

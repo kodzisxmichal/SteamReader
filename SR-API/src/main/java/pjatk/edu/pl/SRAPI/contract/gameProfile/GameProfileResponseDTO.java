@@ -1,10 +1,11 @@
 package pjatk.edu.pl.SRAPI.contract.gameProfile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
 public class GameProfileResponseDTO {
-    private int gameCount;
+    @JsonProperty("response")
     private GameProfilesDTO gamesDTO;
 
     public GameProfileResponseDTO(){}
@@ -13,7 +14,4 @@ public class GameProfileResponseDTO {
         this.gamesDTO = gamesDTO;
     }
 
-    public void setGameCount(int gameCount) {
-        this.gameCount = gameCount;
-    }
 }

@@ -15,6 +15,7 @@ public class Friend {
     @ManyToOne
     private Player playerParent;
     private Long friendSteamID;
+    @Column(unique = true)
     private Long friendSince;
     private String name;
     private String avatar;
