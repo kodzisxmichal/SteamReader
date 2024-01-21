@@ -1,4 +1,4 @@
-package pjatk.edu.pl.SRAPI.updater;
+package pjatk.edu.pl.SRAPI.mappers;
 
 public interface ICatalogMappers {
     AchievementMapper getAchievementMapper();

@@ -1,9 +1,10 @@
-package pjatk.edu.pl.SRAPI.model;
+package pjatk.edu.pl.SRWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import jakarta.persistence.*;
 
 
 @Getter
@@ -17,7 +18,7 @@ public class Friend {
     @ManyToOne
     private Player playerParent;
     private Long friendSteamID;
-    @Column(unique = false)
+    @Column(unique = true)
     private Long friendSince;
     private String name;
     private String avatar;

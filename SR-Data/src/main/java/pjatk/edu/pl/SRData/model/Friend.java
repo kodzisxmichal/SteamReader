@@ -1,4 +1,4 @@
-package pjatk.edu.pl.SRAPI.model;
+package pjatk.edu.pl.SRData.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -17,7 +17,7 @@ public class Friend {
     @ManyToOne
     private Player playerParent;
     private Long friendSteamID;
-    @Column(unique = false)
+    @Column(unique = true)
     private Long friendSince;
     private String name;
     private String avatar;

@@ -1,12 +1,10 @@
-package pjatk.edu.pl.SRAPI.model;
+package pjatk.edu.pl.SRWeb.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
+import jakarta.persistence.*;
 
 @Getter
 @RequiredArgsConstructor
@@ -14,9 +12,13 @@ import java.util.List;
 public class Game {
     @Id
     private Long appID;
-    @OneToMany(mappedBy = "game")
-    private List<GameProfile> gameProfiles;
+//    @OneToMany(mappedBy = "game")
+//    private List<GameProfile> gameProfiles;
     private String name;
+
+//    public void setGameProfiles(List<GameProfile> gameProfiles) {
+//        this.gameProfiles = gameProfiles;
+//    }
 
     public void setAppID(Long appID) {
         this.appID = appID;

@@ -1,10 +1,10 @@
-package pjatk.edu.pl.SRAPI.model;
+package pjatk.edu.pl.SRWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public class GameProfile {
     @ManyToOne
     @JsonBackReference
     private Player player;
-    @ManyToOne
-    private Game game;
+//    @ManyToOne
+//    private Game game;
     @JsonManagedReference
     @OneToMany(mappedBy = "gameProfile")
     private List<Achievement> achievements;
@@ -30,29 +30,16 @@ public class GameProfile {
     private Long lastTimePlayed;
     private Long playTimeDisconnected;
 
-
     public void setID(Long ID) {
         this.ID = ID;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
+//    public void setGame(Game game) {
+//        this.game = game;
+//    }
 
     public void setAchievements(List<Achievement> achievements) {
         this.achievements = achievements;
-    }
-
-    public void setAppID(Long appID) {
-        this.appID = appID;
-    }
-
-    public void setAppName(String appName) {
-        this.appName = appName;
     }
 
     public void setTotalPlaytime(Long totalPlaytime) {
@@ -65,5 +52,17 @@ public class GameProfile {
 
     public void setPlayTimeDisconnected(Long playTimeDisconnected) {
         this.playTimeDisconnected = playTimeDisconnected;
+    }
+
+    public void setAppID(Long appID) {
+        this.appID = appID;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

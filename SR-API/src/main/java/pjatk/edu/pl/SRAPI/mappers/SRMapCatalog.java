@@ -1,4 +1,4 @@
-package pjatk.edu.pl.SRAPI.updater;
+package pjatk.edu.pl.SRAPI.mappers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

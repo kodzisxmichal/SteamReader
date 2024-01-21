@@ -1,6 +1,7 @@
 package pjatk.edu.pl.SRAPI.contract.gameProfile;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 @Getter
@@ -8,12 +9,19 @@ import lombok.Getter;
 public class GameProfileDTO {
     public GameProfileDTO(){}
 
+    @JsonProperty("appid")
     private Long appid;
+    @JsonProperty("playtime_forever")
     private Long playTimeForever;
+    @JsonProperty("playtime_windows_forever")
     private Long playTimeWindowsForever;
+    @JsonProperty("playtime_mac_forever")
     private Long playTimeMacForever;
+    @JsonProperty("playtime_linux_forever")
     private Long playTimeLinuxForever;
+    @JsonProperty("rtime_last_played")
     private Long rtimeLastTimePlayed;
+    @JsonProperty("playtime_disconnected")
     private Long playTimeDisconnected;
 
     public void setAppid(Long appid) {

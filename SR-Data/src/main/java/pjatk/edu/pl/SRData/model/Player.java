@@ -1,4 +1,4 @@
-package pjatk.edu.pl.SRAPI.model;
+package pjatk.edu.pl.SRData.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;

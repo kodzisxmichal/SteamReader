@@ -1,57 +1,39 @@
 package pjatk.edu.pl.SRAPI;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import pjatk.edu.pl.SRAPI.apiclient.IPlayersApiClient;
 import pjatk.edu.pl.SRAPI.contract.achievement.AchievementDTO;
+import pjatk.edu.pl.SRAPI.contract.achievement.AchievementsDTO;
 import pjatk.edu.pl.SRAPI.contract.friend.FriendDTO;
 import pjatk.edu.pl.SRAPI.contract.game.GameDTO;
 import pjatk.edu.pl.SRAPI.contract.gameProfile.GameProfileDTO;
 import pjatk.edu.pl.SRAPI.contract.player.PlayerDTO;
-import pjatk.edu.pl.SRAPI.model.*;
+import pjatk.edu.pl.SRAPI.model.Game;
 import pjatk.edu.pl.SRAPI.repositories.*;
-import pjatk.edu.pl.SRAPI.updater.IMap;
+import pjatk.edu.pl.SRAPI.mappers.*;
+
+import java.util.List;
+import java.util.stream.Stream;
+
 
 @EnableJpaRepositories
 @SpringBootApplication
+@RequiredArgsConstructor
 public class SrApiApplication implements CommandLineRunner {
 
-	final PlayerRepository repository;
-	final FriendRepository friendRepository;
-	final GameProfileRepository gameProfileRepository;
-	final AchievementRepository achievementRepository;
-	final GameRepository gameRepository;
-	final IMap<PlayerDTO,Player> mapper;
-	final IMap<FriendDTO,Friend> friendMapper;
-	final IMap<GameProfileDTO, GameProfile> gameProfileMapper;
-	final IMap<AchievementDTO, Achievement> achievementMapper;
-	final IMap<GameDTO, Game> gameMapper;
-	final IPlayersApiClient client;
-
-	public SrApiApplication(
-			PlayerRepository repository, FriendRepository friendRepository, GameProfileRepository gameProfileRepository, AchievementRepository achievementRepository, GameRepository gameRepository,
-			IMap<PlayerDTO,Player> mapper, IPlayersApiClient client,
-			IMap<FriendDTO,Friend> friendMapper, IMap<GameProfileDTO,GameProfile> gameProfileMapper, IMap<AchievementDTO, Achievement> achievementMapper, IMap<GameDTO,Game> gameMapper){
-		this.repository = repository;
-		this.friendRepository = friendRepository;
-		this.achievementRepository = achievementRepository;
-		this.friendMapper = friendMapper;
-		this.gameProfileRepository = gameProfileRepository;
-		this.gameProfileMapper = gameProfileMapper;
-		this.gameRepository = gameRepository;
-		this.achievementMapper = achievementMapper;
-		this.gameMapper = gameMapper;
-		this.mapper = mapper;
-		this.client = client;
-	}
+	private final SRDataCatalog repository;
+	private final SRMapCatalog mapper;
+	private final IPlayersApiClient client;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SrApiApplication.class, args);
 	}
 
-	private static final long steamid = 76561198140468616L;
+	private static final long steamid = 76561198276528910L;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -59,53 +41,45 @@ public class SrApiApplication implements CommandLineRunner {
 		client.getPlayers(steamid)
 				.getPlayersDTO()
 				.getPlayerDTOS()
-				.stream().map(mapper::map)
-				.forEach(p->{
-					System.out.println(p.getPersonName());
-					repository.save(p);
-				});
+				.stream().map((PlayerDTO playerDTO) -> mapper.getPlayerMapper().map(playerDTO,steamid))
+				.forEach(player->{repository.getPlayers().save(player);});
 
 		client.getFriendList(steamid)
 				.getFriendsDTO()
-				.stream().map(friendMapper::map)
-				//.forEach(friendRepository::save);
-				.forEach(f->{
-
-					f.setPlayerParent(repository.findById(steamid).orElseThrow());
-					friendRepository.save(f);
-				});
+				.stream().map((FriendDTO friendDTO) -> mapper.getFriendMapper().map(friendDTO,steamid))
+				.forEach(friend->repository.getFriends().save(friend));
 
 //		client.getGameList()
 //				.getFriendsListDTO()
 //				.getGameDTOS()
-//				.stream().map(gameMapper::map)
-//				.forEach(gameRepository::save);
+//				.stream().map((GameDTO gameDTO) -> mapper.getGameMapper().map(gameDTO,steamid))
+//				.forEach(game -> repository.getGames().save(game));
 
 
 
-//		client.getGameProfileList(steamid)
-//				.getGameDTOS()
-//				.stream().map(gameProfileMapper::map)
-//				.forEach(gameProfile -> {
-//					//gameProfile.setGame(gameRepository.findById(gameProfile.getAppID()).orElseThrow());
+		client.getGameProfileList(steamid)
+				.getGameDTOS()
+				.stream().map((GameProfileDTO gameProfileDTO) -> mapper.getGameProfileMapper().map(gameProfileDTO,steamid))
+				.forEach(gameProfile -> {
+					repository.getGameProfiles().save(gameProfile);
+
+//					List<AchievementDTO> Achievements = client.getAchievements(steamid, gameProfile.getAppID()).getAchievements();
 //
-//					var appName = client.getAchievementInfo(steamid, gameProfile.getAppID())
-//							.getAchievementsDTO()
-//							.getGameName();
-//					gameProfile.setAppName(appName);
-//
-//					gameProfileRepository.save(gameProfile);
-//
-//					client.getAchievementInfo(steamid, gameProfile.getAppID())
-//							.getAchievementsDTO()
-//							.getAchievements()
-//							.stream().map(achievementMapper::map)
-//							.forEach(achievement -> {
-//								achievement.setGameProfile(gameProfile);
-//								achievementRepository.save(achievement);
-//							});
-//
-//				});
+//					if (Achievements!=null) {
+//						Achievements
+//								.stream()
+//								.map(mapper.getAchievementMapper()::map)
+//								.forEach(achievement -> {
+//									if (gameProfile.getID() != null) {
+//										achievement.setGameProfile(repository.getGameProfiles().findById(gameProfile.getID()).orElseThrow());
+//										repository.getAchievements().save(achievement);
+//									}
+//								});
+//					}
+
+
+				});
+
 
 
 	}
