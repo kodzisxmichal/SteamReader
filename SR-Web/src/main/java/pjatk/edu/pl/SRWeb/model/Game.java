@@ -1,16 +1,12 @@
 package pjatk.edu.pl.SRWeb.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import jakarta.persistence.*;
+
 
 @Getter
 @RequiredArgsConstructor
-@Entity
 public class Game {
-    @Id
     private Long appID;
 //    @OneToMany(mappedBy = "game")
 //    private List<GameProfile> gameProfiles;

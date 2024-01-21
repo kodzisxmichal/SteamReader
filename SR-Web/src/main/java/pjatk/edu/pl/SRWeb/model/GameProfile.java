@@ -4,25 +4,20 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import jakarta.persistence.*;
 
 import java.util.List;
 
 
 @Getter
 @RequiredArgsConstructor
-@Entity
 public class GameProfile {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long ID;
-    @ManyToOne
     @JsonBackReference
     private Player player;
 //    @ManyToOne
 //    private Game game;
     @JsonManagedReference
-    @OneToMany(mappedBy = "gameProfile")
     private List<Achievement> achievements;
     private Long appID;
     private String appName;

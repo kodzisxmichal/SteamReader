@@ -1,10 +1,7 @@
 package pjatk.edu.pl.SRAPI.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pjatk.edu.pl.SRAPI.model.Player;
 import pjatk.edu.pl.SRAPI.services.PlayerService;
 
@@ -25,13 +22,13 @@ public class PlayerController {
         return "Welcome to the steam reader";
     }
 
-    @GetMapping("/steamid")
-    public Player findBySteamID(@RequestParam Long steamID){
+    @GetMapping("/steamid/{steamID}")
+    public Player findBySteamID(@PathVariable Long steamID){
         return playerService.findBySteamID(steamID);
     }
 
     @GetMapping
-    public List<Player> getPlayers(){
+    public List<Player> findAll(){
         return playerService.findAll();
     }
 

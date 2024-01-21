@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class SRDataCatalog implements ICatalogData{
+public class SRDataCatalog implements ICatalogData {
 
     private final AchievementRepository achievementRepository;
     private final FriendRepository friendRepository;

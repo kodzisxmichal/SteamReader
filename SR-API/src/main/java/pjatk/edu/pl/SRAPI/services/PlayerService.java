@@ -2,6 +2,7 @@ package pjatk.edu.pl.SRAPI.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import pjatk.edu.pl.SRAPI.model.Player;
 import pjatk.edu.pl.SRAPI.repositories.PlayerRepository;
 import pjatk.edu.pl.SRAPI.repositories.SRDataCatalog;

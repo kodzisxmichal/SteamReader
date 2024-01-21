@@ -1,21 +1,17 @@
 package pjatk.edu.pl.SRWeb.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import jakarta.persistence.*;
+
 
 import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
-@Entity
 public class Player {
 
-    @Id
     private Long steamID;
     private String personName;
     private String profileURL;
@@ -26,10 +22,8 @@ public class Player {
     private int commentPermission;
     private String realName;
     @JsonManagedReference
-    @OneToMany(mappedBy = "playerParent")
     private List<Friend> friends;
     @JsonManagedReference
-    @OneToMany(mappedBy = "player")
     private List<GameProfile> gameProfiles;
 
     public void setSteamID(Long steamID) {
