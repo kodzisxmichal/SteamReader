@@ -8,9 +8,11 @@
     <title>Steam Reader</title>
 </head>
 <body>
-<div class="search-container">
-    <input type="text" class="search-input" placeholder="Search...">
-    <button class="search-button">Search</button>
-</div>
+    <div class="search-container">
+        <form th:action="@{/player/search}" method="get">
+            <input type="text" th:name="steamID" class="search-input" placeholder="Search...">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -15,7 +15,7 @@ import java.util.List;
 public class PlayerService {
     RestClient restClient;
 
-    private static final String API_URL = "http://localhost:8080";
+    private static final String API_URL = "http://localhost:8082";
 
     private PlayerService(){
         restClient = RestClient.create();
