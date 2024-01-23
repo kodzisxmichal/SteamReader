@@ -18,4 +18,7 @@ public class GameProfileService {
     public List<GameProfile> findAll(){
         return gameProfileRepository.findAll();
     }
+    public List<GameProfile> findAllByPlayerSteamID(Long steamID){
+        return gameProfileRepository.findAllByPlayerSteamID(steamID);
+    }
 }

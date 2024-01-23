@@ -11,8 +11,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlayerService {
     private final PlayerRepository playerRepository;
+    private final APIService apiService;
 
     public Player findBySteamID(Long steamID){
+        apiService.callUpdate(steamID);
+        System.out.println("DDDDD");
         return playerRepository.findById(steamID).orElseThrow();
     }
 

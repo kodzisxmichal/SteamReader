@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pjatk.edu.pl.SRWeb.services.PlayerService;
+import pjatk.edu.pl.SRWeb.services.SRServiceCatalog;
 
 @RequiredArgsConstructor
 @Controller
 public class WebController {
 
-    private final PlayerService service;
+    private final SRServiceCatalog service;
 
     @GetMapping(value="/welcome")
     public String getWelcomeView(){
@@ -37,17 +38,18 @@ public class WebController {
 
     @GetMapping(value = "/player/search")
     public String getPlayer(@RequestParam Long steamID,Model model){
-        model.addAttribute("player",service.findBySteamID(steamID));
+        model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
         return "playerProfile";
     }
     @GetMapping(value="/players")
     public String findAll(Model model){
-        model.addAttribute("players",service.findAll());
+        model.addAttribute("players",service.getPlayers().findAll());
         return "playerProfile";
     }
 
     @GetMapping(value="/player/games")
     public String getGames(@RequestParam Long steamID, Model model){
+        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
         return "gamesLibrary";
     }
 }

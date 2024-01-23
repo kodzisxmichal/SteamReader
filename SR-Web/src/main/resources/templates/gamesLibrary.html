@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/style1.css" th:href="@{/styles/style3.css}">
     <title>Game Library</title>
 </head>
 <body>
@@ -11,10 +12,10 @@
 <div>
     <h1>Game Library</h1>
 
-    <div th:each="gameProfile : ${gameProfiles}">
-        <div style="border: 1px solid #ddd; padding: 10px; margin: 10px; display: inline-block; width: 200px;">
+    <div class="game-container">
+        <div th:each="gameProfile : ${gameProfiles}" class="game-tile">
             <h3 th:text="${gameProfile.getAppName()}"></h3>
-            <p th:text="'Total Playtime: ' + ${gameProfile.getTotalPlaytime()} + ' hours'"></p>
+            <p th:text="'Total Playtime: ' + ${gameProfile.getTotalPlaytime()/60} + ' hours'"></p>
         </div>
     </div>
 </div>

@@ -2,25 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Dark Steam Profile</title>
-  <link rel="stylesheet" type="text/css" href="style2.css">
+  <link rel="stylesheet" type="text/css" href="../static/styles/style2.css" th:href="@{/styles/style2.css}">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="profile-container" th:object="${player}">
 
-  <h1>Dark Steam Profile</h1>
+  <h1><p><span th:text="*{personName}"></span></p></h1>
 
-  <img th:src="${player.avatar}" alt="Profile Image" class="avatar">
+  <img th:src="${player.avatarFull}" alt="Profile Image" class="avatar">
 
-  <p>ID: <span th:text="*{steamID}"></span></p>
-  <p>Nick: <span th:text="*{personName}"></span></p>
+  <p>Steam ID: <span th:text="*{steamID}"></span></p>
   <p>Name: <span th:text="*{realName}"></span></p>
 
   <!-- Add more information as needed -->
 
-  <!-- Button to the next page -->
-  <a href="/gamesLibrary" class="button">Games Library</a>
+  <div class="button-container">
+    <!-- Form to submit SteamID to the first page -->
+    <form id="steamIdForm1" method="get" action="/player/games">
+      <input type="hidden" name="steamID" th:value="${player.steamID}" />
+      <button type="submit" class="button button-primary">Games</button>
+    </form>
+
+    <!-- Form to submit SteamID to the second page -->
+    <form id="steamIdForm2" method="get" action="/player/friends">
+      <input type="hidden" name="steamID" th:value="${player.steamID}" />
+      <button type="submit" class="button button-secondary">Friends</button>
+    </form>
+  </div>
 
 </div>
 

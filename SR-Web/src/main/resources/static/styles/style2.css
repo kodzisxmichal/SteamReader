@@ -37,3 +37,33 @@ span {
     border-radius: 50%;
     margin-bottom: 15px;
 }
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.button {
+    padding: 8px 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.button-primary {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.button-secondary {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.button:hover {
+    opacity: 0.8;
+}

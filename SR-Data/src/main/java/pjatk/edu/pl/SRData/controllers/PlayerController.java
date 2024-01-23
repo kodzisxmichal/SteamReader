@@ -1,5 +1,6 @@
 package pjatk.edu.pl.SRData.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,19 +12,11 @@ import pjatk.edu.pl.SRData.services.PlayerService;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/players")
 public class PlayerController {
+
     private final PlayerService playerService;
-
-    @Autowired
-    public PlayerController(PlayerService playerService){
-        this.playerService = playerService;
-    }
-
-    @GetMapping("/welcome")
-    public String welcome(){
-        return "Welcome to the steam reader";
-    }
 
     @GetMapping("/steamid/{steamID}")
     public Player findBySteamID(@PathVariable Long steamID){

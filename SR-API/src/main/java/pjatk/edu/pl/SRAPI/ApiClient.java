@@ -1,4 +1,4 @@
-package pjatk.edu.pl.SRAPI.apiclient;
+package pjatk.edu.pl.SRAPI;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -13,11 +13,11 @@ import pjatk.edu.pl.SRAPI.contract.gameProfile.GameProfilesDTO;
 import pjatk.edu.pl.SRAPI.contract.player.PlayerResponseDTO;
 
 @Component
-public class PlayerApiClient implements IPlayersApiClient{
+public class ApiClient implements IApiClient {
     private final RestTemplate restTemplate;
     private final String apiKey = "80AFC44E1C98D37C30713AC8BF2DAFD2";
 
-    public PlayerApiClient(){
+    public ApiClient(){
         this.restTemplate = new RestTemplate();
     }
 

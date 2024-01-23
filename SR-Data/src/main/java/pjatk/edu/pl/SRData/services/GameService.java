@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
-
     public Game findByID(Long appID){
         return gameRepository.findById(appID).orElseThrow();
     }
