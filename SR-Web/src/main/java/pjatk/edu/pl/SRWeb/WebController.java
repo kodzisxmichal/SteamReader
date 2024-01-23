@@ -1,6 +1,7 @@
 package pjatk.edu.pl.SRWeb;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pjatk.edu.pl.SRWeb.services.PlayerService;
 import pjatk.edu.pl.SRWeb.services.SRServiceCatalog;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class WebController {
@@ -39,6 +41,7 @@ public class WebController {
     @GetMapping(value = "/player/search")
     public String getPlayer(@RequestParam Long steamID,Model model){
         model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
+        log.info("Searchng For Player");
         return "playerProfile";
     }
     @GetMapping(value="/players")

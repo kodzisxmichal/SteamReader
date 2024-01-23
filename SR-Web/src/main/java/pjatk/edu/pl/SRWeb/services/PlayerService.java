@@ -21,6 +21,10 @@ public class PlayerService {
         restClient = RestClient.create();
     }
     public Player findBySteamID(Long steamID){
+        restClient.put()
+                .uri("http://localhost:8080/update/"+steamID)
+                .retrieve();
+
         Player player = restClient.get()
                 .uri(API_URL + "/players/steamid/"+steamID)
                 .retrieve()
