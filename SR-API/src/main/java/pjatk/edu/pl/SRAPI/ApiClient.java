@@ -1,5 +1,6 @@
 package pjatk.edu.pl.SRAPI;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -22,50 +23,51 @@ public class ApiClient implements IApiClient {
     }
 
     @Override
-    public PlayerResponseDTO getPlayers(Long steamID) {
+    public ResponseEntity<PlayerResponseDTO> getPlayers(Long steamID) {
         var URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key="
                 +apiKey+"&steamids="+steamID;
 
-        return restTemplate.getForObject(URL, PlayerResponseDTO.class);
+        return restTemplate.getForEntity(URL, PlayerResponseDTO.class);
     }
 
     @Override
-    public FriendsDTO getFriendList(Long steamID) {
+    public ResponseEntity<FriendsDTO> getFriendList(Long steamID) {
         var URL = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="
                 +apiKey+"&steamid="+steamID+"&relationship=friend";
 
-        ResponseEntity<FriendsListDTO> response = restTemplate.getForEntity(URL, FriendsListDTO.class);
+        var response = restTemplate.getForEntity(URL, FriendsListDTO.class);
+        var friendsDTO = response.getBody().getFriendsListDTO();
 
-        return response.getBody().getFriendsListDTO();
+        return new ResponseEntity<>(friendsDTO, HttpStatus.OK);
     }
 
     @Override
-    public GameProfilesDTO getGameProfileList(Long steamID) {
+    public ResponseEntity<GameProfilesDTO> getGameProfileList(Long steamID) {
         var URL = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key="
                 +apiKey+"&steamid="+steamID+"&format=json";
 
-        ResponseEntity<GameProfileResponseDTO> response = restTemplate.getForEntity(URL, GameProfileResponseDTO.class);
+        var response = restTemplate.getForEntity(URL, GameProfileResponseDTO.class);
+        var gamesDTO = response.getBody().getGamesDTO();
 
-        return response.getBody().getGamesDTO();
+        return new ResponseEntity<>(gamesDTO, HttpStatus.OK);
     }
 
     @Override
-    public GameListDTO getGameList() {
+    public ResponseEntity<GameListDTO> getGameList() {
         var URL = "https://api.steampowered.com/ISteamApps/GetAppList/v2/";
 
-        ResponseEntity<GameListDTO> response = restTemplate.getForEntity(URL, GameListDTO.class);
-
-        return response.getBody();
+        return restTemplate.getForEntity(URL, GameListDTO.class);
     }
 
     @Override
-    public AchievementsDTO getAchievements(Long steamID, Long appID) {
+    public ResponseEntity<AchievementsDTO> getAchievements(Long steamID, Long appID) {
         var URL = "http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid="+appID+"&key="
                 +apiKey+"&steamid="+steamID;
 
-        ResponseEntity<AchievementInfoDTO> response = restTemplate.getForEntity(URL, AchievementInfoDTO.class);
+        var response = restTemplate.getForEntity(URL, AchievementInfoDTO.class);
+        var achievementsDTO = response.getBody().getAchievementsDTO();
 
-        return response.getBody().getAchievementsDTO();
+        return new ResponseEntity<>(achievementsDTO,HttpStatus.OK);
 
     }
 }

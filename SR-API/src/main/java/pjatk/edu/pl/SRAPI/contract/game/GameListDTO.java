@@ -9,7 +9,7 @@ public class GameListDTO {
     @JsonProperty("applist")
     GamesDTO gamesDTO;
 
-    public GamesDTO getFriendsListDTO() {
+    public GamesDTO getGamesDTO() {
         return gamesDTO;
     }
 

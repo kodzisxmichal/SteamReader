@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/style1.css" th:href="@{/styles/style4.css}">
+    <title>Tiles Grid</title>
+</head>
+<body>
+<div class="tiles-grid">
+    <div class="tile" th:each="friend : ${friends}">
+        <img th:src="${friend.avatar}" alt="Image">
+        <p th:text="${friend.getName()}"></p>
+    </div>
+</div>
+</body>
+</html>

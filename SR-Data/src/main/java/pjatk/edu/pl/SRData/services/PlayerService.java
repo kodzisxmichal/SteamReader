@@ -1,12 +1,14 @@
 package pjatk.edu.pl.SRData.services;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pjatk.edu.pl.SRData.model.Player;
 import pjatk.edu.pl.SRData.repositories.PlayerRepository;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlayerService {
@@ -15,7 +17,7 @@ public class PlayerService {
 
     public Player findBySteamID(Long steamID){
         apiService.callUpdate(steamID);
-        System.out.println("DDDDD");
+        log.info("Called Update");
         return playerRepository.findById(steamID).orElseThrow();
     }
 

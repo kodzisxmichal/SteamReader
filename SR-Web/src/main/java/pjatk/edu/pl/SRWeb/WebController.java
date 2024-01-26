@@ -1,6 +1,7 @@
 package pjatk.edu.pl.SRWeb;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
@@ -25,34 +26,45 @@ public class WebController {
     }
 
     @GetMapping()
-    public String getMainPage(Model model){
+    public String getMainPage(){
         return "mainPage";
     }
-    @PostMapping()
-    public String getMainPage(@RequestParam Long steamID, Model model){
-        if(steamID <10000000000000000L || steamID >=100000000000000000L) {
-            model.addAttribute("Error Message", "SteamID must have 17 numbers");
-            return "mainPage";
-        }
 
-        return "redirect:/player/search";
+    @PostMapping()
+    public String getPostMainPage(@RequestParam Long steamID, Model model){
+        model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
+        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
+        model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
+
+        return "test";
     }
 
     @GetMapping(value = "/player/search")
     public String getPlayer(@RequestParam Long steamID,Model model){
+        log.info("Calling for player");
+        if(steamID<10000000000000000L || steamID >=100000000000000000L) {
+            log.info("Wrong steamID");
+            return getMainPage();
+        }
+
         model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
-        log.info("Searchng For Player");
-        return "playerProfile";
-    }
-    @GetMapping(value="/players")
-    public String findAll(Model model){
-        model.addAttribute("players",service.getPlayers().findAll());
+        log.info("Success");
         return "playerProfile";
     }
 
     @GetMapping(value="/player/games")
     public String getGames(@RequestParam Long steamID, Model model){
+        log.info("Calling for gameProfiles of player with steamID:" + steamID);
         model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
+        log.info("Success");
         return "gamesLibrary";
+    }
+
+    @GetMapping(value="/player/friends")
+    public String getFriends(@RequestParam Long steamID, Model model){
+        log.info("Calling for friends of player with steamID:" + steamID);
+        model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
+        log.info("Success");
+        return "friendsLibrary";
     }
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona HTML</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            border: none;
+            background-color: #555;
+            color: #fff;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        div.panel {
+            background-color: #555;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        div.panel div {
+            margin-bottom: 10px;
+        }
+
+        div.panel button {
+            cursor: pointer;
+        }
+
+        div.panel a {
+            text-decoration: none;
+        }
+
+        div.friend {
+            display: flex;
+            align-items: center;
+        }
+
+        div.friend img {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Pasek wyszukiwania liczb z 17 cyframi -->
+<div class="panel">
+    <form th:action="@{/player/search}" method="get">
+        <input type="number" th:name="steamID" class="search-input" placeholder="Search..." required>
+        <button type="submit" class="search-button">Search</button>
+    </form>
+</div>
+
+
+</body>
+</html>

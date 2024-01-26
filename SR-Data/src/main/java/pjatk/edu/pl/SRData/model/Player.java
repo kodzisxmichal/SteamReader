@@ -31,6 +31,10 @@ public class Player {
     @OneToMany(mappedBy = "player")
     private List<GameProfile> gameProfiles;
 
+    public Player(String personName){
+        this.personName = personName;
+    }
+
     public void setSteamID(Long steamID) {
         this.steamID = steamID;
     }
