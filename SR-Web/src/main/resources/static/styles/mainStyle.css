@@ -1,0 +1,44 @@
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: #242424;
+}
+
+.flexbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    margin: 0 -5px;
+}
+
+.item {
+    box-sizing: border-box;
+    width: 33.33%;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+
+.content {
+    color: #ffffff;
+    background-color: #333333;
+    font-weight: 600;
+    text-align: center;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px;
+    box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.avatar {
+    width: 50px; /* Adjust width as needed */
+    height: 50px; /* Adjust height as needed */
+    margin-right: 10px;
+}

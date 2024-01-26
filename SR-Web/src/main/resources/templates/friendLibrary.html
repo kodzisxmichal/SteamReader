@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles/style1.css" th:href="@{/styles/style4.css}">
+    <link rel="stylesheet" href="../static/styles/style1.css" th:href="@{/styles/mainStyle.css}">
+    <link rel="stylesheet" href="../static/styles/style1.css" th:href="@{/styles/tileGrid.css}">
     <title>Tiles Grid</title>
 </head>
 <body>
 <div class="tiles-grid">
-    <div class="tile" th:each="friend : ${friends}">
+    <div class="tile" th:each="friend : ${friends.subList(0,9)}">
         <img th:src="${friend.avatar}" alt="Image">
         <p th:text="${friend.getName()}"></p>
     </div>

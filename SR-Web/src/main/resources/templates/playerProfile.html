@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Dark Steam Profile</title>
-  <link rel="stylesheet" type="text/css" href="../static/styles/style2.css" th:href="@{/styles/style2.css}">
+  <title>Steam Reader</title>
+  <link rel="stylesheet" type="text/css" href="../static/styles/mainStyle.css" th:href="@{/styles/mainStyle.css}">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="profile-container" th:object="${player}">
-
-  <h1><p><span th:text="*{personName}"></span></p></h1>
-
-  <img th:src="${player.avatarFull}" alt="Profile Image" class="avatar">
-
-  <p>Steam ID: <span th:text="*{steamID}"></span></p>
-  <p>Name: <span th:text="*{realName}"></span></p>
-
-  <!-- Add more information as needed -->
-
-  <div class="button-container">
-    <!-- Form to submit SteamID to the first page -->
-    <form id="steamIdForm1" method="get" action="/player/games">
-      <input type="hidden" name="steamID" th:value="${player.steamID}" />
-      <button type="submit" class="button button-primary">Games</button>
-    </form>
-
-    <!-- Form to submit SteamID to the second page -->
-    <form id="steamIdForm2" method="get" action="/player/friends">
-      <input type="hidden" name="steamID" th:value="${player.steamID}" />
-      <button type="submit" class="button button-secondary">Friends</button>
-    </form>
+<div class="flexbox">
+  <div class="item">
+    <div class="content">
+      <div th:each="gameProfile : ${gameProfiles.subList(0,9)}" class="tile">
+        <h3 th:text="${gameProfile.appName}"></h3>
+        <p th:text="${gameProfile.totalPlaytime/60} + ' hours'"></p>
+      </div>
+    </div>
   </div>
-
+  <div class="item">
+    <div class="content">
+      <div class="profile-container" th:object="${player}">
+        <h1><p><span th:text="*{personName}"></span></p></h1>
+        <img th:src="${player.avatarFull}" alt="Profile Image" class="avatar" style="width: 150px; height: 150px">
+        <p><span th:text="*{steamID}"></span></p>
+        <p><span th:text="*{realName}"></span></p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="content">
+      <a th:each="friend : ${friends.subList(0,9)}" class="tile" th:href="@{'/player/search?steamID='+ ${friend.friendSteamID}}">
+          <img th:src="${friend.avatar}" class="avatar" alt="Avatar">
+          <span th:text="${friend.name}"></span>
+      </a>
+    </div>
+  </div>
 </div>
 
 </body>

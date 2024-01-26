@@ -1,16 +1,11 @@
 package pjatk.edu.pl.SRWeb;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pjatk.edu.pl.SRWeb.services.PlayerService;
 import pjatk.edu.pl.SRWeb.services.SRServiceCatalog;
 
 @Slf4j
@@ -27,17 +22,17 @@ public class WebController {
 
     @GetMapping()
     public String getMainPage(){
-        return "mainPage";
+        return "search";
     }
 
-    @PostMapping()
-    public String getPostMainPage(@RequestParam Long steamID, Model model){
-        model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
-        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
-        model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
-
-        return "test";
-    }
+//    @GetMapping("/player/search")
+//    public String getPostMainPage(@RequestParam Long steamID, Model model){
+//        model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
+//        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
+//        model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
+//
+//        return "test";
+//    }
 
     @GetMapping(value = "/player/search")
     public String getPlayer(@RequestParam Long steamID,Model model){
@@ -48,6 +43,8 @@ public class WebController {
         }
 
         model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
+        model.addAttribute("friends",service.getFriends().findAllByParentID(steamID));
+        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
         log.info("Success");
         return "playerProfile";
     }
@@ -57,7 +54,7 @@ public class WebController {
         log.info("Calling for gameProfiles of player with steamID:" + steamID);
         model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
         log.info("Success");
-        return "gamesLibrary";
+        return "gameLibrary";
     }
 
     @GetMapping(value="/player/friends")
@@ -65,6 +62,6 @@ public class WebController {
         log.info("Calling for friends of player with steamID:" + steamID);
         model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
         log.info("Success");
-        return "friendsLibrary";
+        return "friendLibrary";
     }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dark Steam Profile</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/mainStyle.css" th:href="@{/styles/mainStyle.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Main profile container -->
+<div class="profile-container" th:object="${player}">
+    <h1>Dark Steam Profile</h1>
+    <img th:src="${player.avatar}" alt="Profile Image" class="avatar">
+    <p>ID: <span th:text="*{steamID}"></span></p>
+    <p>Nick: <span th:text="*{personName}"></span></p>
+    <p>Name: <span th:text="*{realName}"></span></p>
+    <!-- Add more information as needed -->
+</div>
+
+<!-- Friend panel -->
+<div class="friend-panel">
+    <h2>Friends</h2>
+    <div class="friend-tiles">
+        <!-- Iterate over friend objects -->
+        <div th:each="friend : ${friends}" class="friend-tile">
+            <img th:src="${friend.avatar}" alt="Friend Avatar" class="friend-avatar">
+            <p th:text="${friend.name}" class="friend-name"></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
