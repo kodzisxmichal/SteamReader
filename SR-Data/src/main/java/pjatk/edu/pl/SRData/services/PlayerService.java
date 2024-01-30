@@ -16,8 +16,11 @@ public class PlayerService {
     private final APIService apiService;
 
     public Player findBySteamID(Long steamID){
+//        if(playerRepository.findById(steamID).isEmpty()){
+//            log.info("Called Update - Fetching player from API");
+//            apiService.callUpdate(steamID);
+//        }
         apiService.callUpdate(steamID);
-        log.info("Called Update");
         return playerRepository.findById(steamID).orElseThrow();
     }
 

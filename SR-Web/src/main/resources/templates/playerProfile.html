@@ -10,6 +10,7 @@
 <div class="flexbox">
   <div class="item">
     <div class="content">
+      games
       <div th:each="gameProfile : ${gameProfiles.subList(0,9)}" class="tile">
         <h3 th:text="${gameProfile.appName}"></h3>
         <p th:text="${gameProfile.totalPlaytime/60} + ' hours'"></p>
@@ -28,6 +29,7 @@
   </div>
   <div class="item">
     <div class="content">
+      <a th:href="@{'/player/friends?steamID='+ ${player.steamID}}"> Friends </a>
       <a th:each="friend : ${friends.subList(0,9)}" class="tile" th:href="@{'/player/search?steamID='+ ${friend.friendSteamID}}">
           <img th:src="${friend.avatar}" class="avatar" alt="Avatar">
           <span th:text="${friend.name}"></span>

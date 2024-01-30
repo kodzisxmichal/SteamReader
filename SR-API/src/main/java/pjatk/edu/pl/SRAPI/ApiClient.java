@@ -34,7 +34,7 @@ public class ApiClient implements IApiClient {
     public ResponseEntity<FriendsDTO> getFriendList(Long steamID) {
         var URL = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key="
                 +apiKey+"&steamid="+steamID+"&relationship=friend";
-
+        
         var response = restTemplate.getForEntity(URL, FriendsListDTO.class);
         var friendsDTO = response.getBody().getFriendsListDTO();
 

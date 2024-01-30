@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="tiles-grid">
-    <div class="tile" th:each="friend : ${friends.subList(0,9)}">
+    <div class="tile" th:each="friend : ${friends}">
         <img th:src="${friend.avatar}" alt="Image">
         <p th:text="${friend.getName()}"></p>
     </div>
