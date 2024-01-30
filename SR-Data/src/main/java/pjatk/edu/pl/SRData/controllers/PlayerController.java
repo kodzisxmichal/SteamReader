@@ -26,8 +26,8 @@ public class PlayerController {
     public ResponseEntity<Player> findBySteamID(@PathVariable Long steamID){
         log.info("Looking for player with steamID:" + steamID);
         Player player = playerService.findBySteamID(steamID);
-        log.info("Success");
 
+        log.info("Success");
         return new ResponseEntity<>(player, HttpStatus.OK);
     }
 

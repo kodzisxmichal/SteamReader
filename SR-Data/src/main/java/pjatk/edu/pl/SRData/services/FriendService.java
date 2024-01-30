@@ -28,7 +28,14 @@ public class FriendService {
             log.info(friend.getName());
             friendRepository.save(friend);
         }
-
+        if(friends.isEmpty()){
+            for(int i=0;i<9;i++) {
+                var friendInfo = new Friend();
+                friendInfo.setName("No Perrmision");
+                friendInfo.setAvatar("");
+                friends.add(friendInfo);
+            }
+        }
         return friends;
     }
 }

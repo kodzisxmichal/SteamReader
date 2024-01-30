@@ -2,6 +2,7 @@ package pjatk.edu.pl.SRData.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pjatk.edu.pl.SRData.model.Friend;
 import pjatk.edu.pl.SRData.model.GameProfile;
 import pjatk.edu.pl.SRData.repositories.GameProfileRepository;
 
@@ -19,6 +20,14 @@ public class GameProfileService {
         return gameProfileRepository.findAll();
     }
     public List<GameProfile> findAllByPlayerSteamID(Long steamID){
-        return gameProfileRepository.findAllByPlayerSteamID(steamID);
+        var gameProfiles = gameProfileRepository.findAllByPlayerSteamID(steamID);
+        if(gameProfiles.isEmpty()){
+            for(int i=0;i<9;i++) {
+                var gameProfilesInfo = new GameProfile();
+                gameProfilesInfo.setAppName("No Permission");
+                gameProfiles.add(gameProfilesInfo);
+            }
+        }
+        return gameProfiles;
     }
 }

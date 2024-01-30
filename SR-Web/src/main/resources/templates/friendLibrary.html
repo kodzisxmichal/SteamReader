@@ -9,10 +9,10 @@
 </head>
 <body>
 <div class="tiles-grid">
-    <div class="tile" th:each="friend : ${friends}">
-        <img th:src="${friend.avatar}" alt="Image">
-        <p th:text="${friend.getName()}"></p>
-    </div>
+    <a th:each="friend : ${friends}" class="tile" th:href="@{'/player/search?steamID='+ ${friend.friendSteamID}}">
+        <img th:src="${friend.avatar}" class="avatar" alt="Avatar">
+        <span th:text="${friend.name}"></span>
+    </a>
 </div>
 </body>
 </html>

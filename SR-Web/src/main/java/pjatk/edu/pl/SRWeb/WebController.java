@@ -25,15 +25,6 @@ public class WebController {
         return "search";
     }
 
-//    @GetMapping("/player/search")
-//    public String getPostMainPage(@RequestParam Long steamID, Model model){
-//        model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
-//        model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
-//        model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
-//
-//        return "test";
-//    }
-
     @GetMapping(value = "/player/search")
     public String getPlayer(@RequestParam Long steamID,Model model){
         log.info("Calling for player");
@@ -45,6 +36,7 @@ public class WebController {
         model.addAttribute("player",service.getPlayers().findBySteamID(steamID));
         model.addAttribute("friends",service.getFriends().findAllByParentID(steamID));
         model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
+
         log.info("Success");
         return "playerProfile";
     }
@@ -53,6 +45,7 @@ public class WebController {
     public String getGames(@RequestParam Long steamID, Model model){
         log.info("Calling for gameProfiles of player with steamID:" + steamID);
         model.addAttribute("gameProfiles", service.getGameProfiles().findAllBySteamID(steamID));
+
         log.info("Success");
         return "gameLibrary";
     }
@@ -61,6 +54,7 @@ public class WebController {
     public String getFriends(@RequestParam Long steamID, Model model){
         log.info("Calling for friends of player with steamID:" + steamID);
         model.addAttribute("friends", service.getFriends().findAllByParentID(steamID));
+
         log.info("Success");
         return "friendLibrary";
     }

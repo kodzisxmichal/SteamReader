@@ -17,6 +17,7 @@
         <div th:each="gameProfile : ${gameProfiles}" class="game-tile">
             <h3 th:text="${gameProfile.getAppName()}"></h3>
             <p th:text="'Total Playtime: ' + ${gameProfile.getTotalPlaytime()/60} + ' hours'"></p>
+            <br>
         </div>
     </div>
 </div>

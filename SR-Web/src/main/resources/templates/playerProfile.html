@@ -10,7 +10,7 @@
 <div class="flexbox">
   <div class="item">
     <div class="content">
-      games
+      <a th:href="@{'/player/games?steamID='+ ${player.steamID}}"> Games </a>
       <div th:each="gameProfile : ${gameProfiles.subList(0,9)}" class="tile">
         <h3 th:text="${gameProfile.appName}"></h3>
         <p th:text="${gameProfile.totalPlaytime/60} + ' hours'"></p>

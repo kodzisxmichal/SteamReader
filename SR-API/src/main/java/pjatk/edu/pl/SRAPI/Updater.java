@@ -22,7 +22,6 @@ public class Updater {
     public void updateProfileInfo(Long steamID){
         log.info("Updating function called");
         savePlayer(steamID);
-//        saveGames();
         saveFriends(steamID);
         saveGameProfiles(steamID);
     }
