@@ -14,7 +14,7 @@ public class APIService {
 
     public void callUpdate(Long steamID){
         restClient.put()
-                .uri("http://localhost:8080/update/"+steamID)
+                .uri( API_URL+"/update/"+steamID)
                 .retrieve();
     }
 }

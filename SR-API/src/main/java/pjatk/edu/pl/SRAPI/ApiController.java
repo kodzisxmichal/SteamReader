@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ApiController {
     private final Updater updater;
+
     @PutMapping("/update/{steamID}")
     public ResponseEntity<String> update(@PathVariable Long steamID){
         updater.updateProfileInfo(steamID);

@@ -20,10 +20,11 @@ public class PlayerService {
     public Player findBySteamID(Long steamID){
         log.info("Service looking for player");
         Optional<Player> player = playerRepository.findById(steamID);
-        if(player.isEmpty() || player.get().getRealName()==null){
-            log.info("Called Update - Fetching player from API");
-            apiService.callUpdate(steamID);
-        }
+//        if(player.isEmpty() || player.get().getRealName()==null){
+//            log.info("Called Update - Fetching player from API");
+//            apiService.callUpdate(steamID);
+//        }
+        apiService.callUpdate(steamID);
 
         return player.orElseThrow(PlayerNotFoundException::new);
     }

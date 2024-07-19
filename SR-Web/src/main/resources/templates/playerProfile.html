@@ -2,39 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Steam Reader</title>
-  <link rel="stylesheet" type="text/css" href="../static/styles/mainStyle.css" th:href="@{/styles/mainStyle.css}">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../static/styles/profile.css" th:href="@{/styles/profile.css}">
+  <link rel="stylesheet" type="text/css" href="../static/styles/global.css" th:href="@{/styles/global.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="flexbox">
+<div class="container">
   <div class="item">
-    <div class="content">
-      <a th:href="@{'/player/games?steamID='+ ${player.steamID}}"> Games </a>
-      <div th:each="gameProfile : ${gameProfiles.subList(0,9)}" class="tile">
-        <h3 th:text="${gameProfile.appName}"></h3>
-        <p th:text="${gameProfile.totalPlaytime/60} + ' hours'"></p>
-      </div>
+    <div class="wrapper">
+        <a th:href="@{'/player/games?steamID='+ ${player.steamID}}"> Games </a>
+        <div th:each="gameProfile : ${gameProfiles.subList(0,9)}" class="tile">
+            <h3 th:text="${gameProfile.appName}"></h3>
+            <p th:text="${gameProfile.totalPlaytime/60} + ' hours'"></p>
+        </div>
     </div>
   </div>
-  <div class="item">
-    <div class="content">
+  <div class="item long">
       <div class="profile-container" th:object="${player}">
-        <h1><p><span th:text="*{personName}"></span></p></h1>
+        <span class="nick" th:text="*{personName}"></span>
         <img th:src="${player.avatarFull}" alt="Profile Image" class="avatar" style="width: 150px; height: 150px">
-        <p><span th:text="*{steamID}"></span></p>
-        <p><span th:text="*{realName}"></span></p>
+        <p class="steam-id"><span th:text="*{steamID}"></span></p>
+        <p class="name"><span th:text="*{realName}"></span></p>
       </div>
-    </div>
   </div>
   <div class="item">
-    <div class="content">
       <a th:href="@{'/player/friends?steamID='+ ${player.steamID}}"> Friends </a>
       <a th:each="friend : ${friends.subList(0,9)}" class="tile" th:href="@{'/player/search?steamID='+ ${friend.friendSteamID}}">
           <img th:src="${friend.avatar}" class="avatar" alt="Avatar">
           <span th:text="${friend.name}"></span>
       </a>
-    </div>
   </div>
 </div>
 

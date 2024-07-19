@@ -8,7 +8,6 @@ import pjatk.edu.pl.SRAPI.contract.game.GameDTO;
 import pjatk.edu.pl.SRAPI.contract.gameProfile.GameProfileDTO;
 import pjatk.edu.pl.SRAPI.contract.player.PlayerDTO;
 import pjatk.edu.pl.SRAPI.mappers.ICatalogMappers;
-import pjatk.edu.pl.SRAPI.model.Player;
 import pjatk.edu.pl.SRAPI.repositories.ICatalogData;
 
 @Slf4j
@@ -67,22 +66,6 @@ public class Updater {
                 .stream().map((GameProfileDTO gameProfileDTO) -> mapper.getGameProfileMapper().map(gameProfileDTO,steamID))
                 .forEach(gameProfile -> {
                     repository.getGameProfiles().save(gameProfile);
-
-//					List<AchievementDTO> Achievements = client.getAchievements(steamid, gameProfile.getAppID()).getAchievements();
-//
-//					if (Achievements!=null) {
-//						Achievements
-//								.stream()
-//								.map(mapper.getAchievementMapper()::map)
-//								.forEach(achievement -> {
-//									if (gameProfile.getID() != null) {
-//										achievement.setGameProfile(repository.getGameProfiles().findById(gameProfile.getID()).orElseThrow());
-//										repository.getAchievements().save(achievement);
-//									}
-//								});
-//					}
-
-
                 });
     }
 
